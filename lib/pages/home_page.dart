@@ -91,6 +91,7 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   db.toDoList.insert(toDoIndex, toDoTask);
                 });
+                db.updateDatabase();
               }),
         ),
       );
