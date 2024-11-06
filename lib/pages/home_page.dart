@@ -84,9 +84,9 @@ class _HomePageState extends State<HomePage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           duration: const Duration(seconds: 3),
-          content: const Text('刪除便條中'),
+          content: const Text('撕除便條紙中'),
           action: SnackBarAction(
-              label: '復原',
+              label: '貼回去',
               onPressed: () {
                 setState(() {
                   db.toDoList.insert(toDoIndex, toDoTask);
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           duration: Duration(seconds: 1),
-          content: Text('已刪除便條'),
+          content: Text('已撕下便條紙'),
         ),
       );
     }
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('便條'),
+        title: const Text('小便貼'),
         shadowColor: Colors.yellow[200],
         elevation: 5,
       ),
