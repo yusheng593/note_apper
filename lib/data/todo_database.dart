@@ -7,7 +7,10 @@ class TodoDatabase {
   final _noteBox = Hive.box('noteBox');
 
   void createInitialData() {
-    toDoList = [ToDo(task: '點擊右下新增便條紙', isCompleted: false)];
+    toDoList = [
+      ToDo(task: '點擊右下新增便條紙', isCompleted: false),
+      ToDo(task: '長按拖動便條紙', isCompleted: false)
+    ];
   }
 
   void loadData() {

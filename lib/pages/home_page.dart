@@ -4,7 +4,7 @@ import 'package:note_apper/constants/note_colors.dart';
 import 'package:note_apper/data/todo_database.dart';
 import 'package:note_apper/models/to_do.dart';
 import 'package:note_apper/widget/dialog_widget.dart';
-import 'package:note_apper/widget/note_widget.dart';
+import 'package:note_apper/widget/note_list_view_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   final TextEditingController noteController = TextEditingController();
 
-  void checkBoxChanged(bool? value, int index) {
+  void checkBoxChanged(int index) {
     setState(() {
       db.toDoList[index].toggleCompletion();
     });
@@ -105,6 +105,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void saveTask() {
+    db.updateDatabase();
+  }
+
   @override
   void dispose() {
     noteController.dispose();
@@ -122,29 +126,17 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
-        backgroundColor: NoteColors.appBarBackgroundColor,
+        backgroundColor: Colors.amber,
         child: Icon(
           Icons.add,
           color: NoteColors.titleColor,
         ),
       ),
-      body: ListView.builder(
-        itemCount: db.toDoList.length,
-        itemBuilder: (context, index) => Dismissible(
-          key: ValueKey(db.toDoList[index]),
-          background: Container(
-            color: Colors.amber,
-            margin: const EdgeInsets.only(top: 24, right: 24),
-            child: const Icon(Icons.delete),
-          ),
-          onDismissed: (direction) {
-            deleteTask(db.toDoList[index]);
-          },
-          child: NoteWidget(
-              task: db.toDoList[index].task,
-              isCompleted: db.toDoList[index].isCompleted,
-              onChanged: (value) => checkBoxChanged(value, index)),
-        ),
+      body: NoteListViewWidget(
+        noteList: db.toDoList,
+        deleteTask: deleteTask,
+        checkBoxChanged: checkBoxChanged,
+        saveTask: saveTask,
       ),
     );
   }

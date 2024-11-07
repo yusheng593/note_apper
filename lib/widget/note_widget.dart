@@ -14,26 +14,33 @@ class NoteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-      child: Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: NoteColors.appBarBackgroundColor),
-        child: Row(
-          children: [
-            Checkbox(value: isCompleted, onChanged: onChanged),
-            Text(
-              task,
-              style: TextStyle(
-                  decoration: isCompleted
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none,
-                  color: NoteColors.textColor,
-                  fontSize: 18),
-            ),
-          ],
+    return Container(
+      color: NoteColors.scaffoldBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: NoteColors.appBarBackgroundColor),
+          child: Row(
+            children: [
+              Checkbox(value: isCompleted, onChanged: onChanged),
+              Expanded(
+                child: Text(
+                  task,
+                  style: TextStyle(
+                      decoration: isCompleted
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                      color: NoteColors.textColor,
+                      fontSize: 18),
+                  softWrap: true,
+                ),
+              ),
+              const Icon(Icons.drag_indicator),
+            ],
+          ),
         ),
       ),
     );
