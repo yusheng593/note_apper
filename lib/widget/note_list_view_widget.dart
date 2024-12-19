@@ -31,6 +31,7 @@ class _NoteListViewWidgetState extends State<NoteListViewWidget> {
             background: Container(
               color: Colors.amber,
               margin: const EdgeInsets.only(top: 24, right: 24),
+              child: const Icon(Icons.delete),
             ),
             onDismissed: (direction) => widget.deleteTask(noteList[index]),
             child: NoteWidget(
